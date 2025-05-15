@@ -32,12 +32,11 @@ done:
     ret
 load:
     mov ah, 02h
-    mov al, 1
+    mov al, 100
     mov ch, 0
     mov cl, 2
-    mov bx, 0x8112
+    mov bx, 0x0100000
     int 0x13
-    call loop
     ret
 
 load_protected_mode:
@@ -91,10 +90,8 @@ load32:
     in al, 0x92
     or al, 2
     out 0x92, al
-
+    jmp 0x0100000
     jmp $
 
 times 510 - ($ - $$) db 0 
 dw 0xAA55
-db "[Sector 2 is loaded]",0
-times 510  db 0 
